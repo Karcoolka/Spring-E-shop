@@ -16,6 +16,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User {
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", roles=" + roles + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
