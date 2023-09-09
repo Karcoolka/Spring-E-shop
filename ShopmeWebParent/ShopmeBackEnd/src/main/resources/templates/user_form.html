@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 	<script type="text/javascript" th:src="@{webjars/jquery/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+		
 
 </head>
 
@@ -18,7 +19,7 @@
 		<div>
 			<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 				<a class="navbar-brand" th:href="@{/}">
-				<img th:src="@{/images/ShopmeAdminSmall.png}"/>	
+				<img th:src="@{/images/ShopmeAdminSmall.png}"/>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
 					<span class="navbar-toggler-icon"></span>					
@@ -73,36 +74,54 @@
 	th:object="${user}">
 	<div class="border border-secondary rounded p-3">
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">E-mail</label>
+			<label class="col-sm-4 col-form-label">E-mail:</label>
 			<div class="col-sm-8">
-				<input type="email" class="form-control" th:field="*{email}" requried minlength="8" maxlength="128" />
+				<input type="email" class="form-control" th:field="*{email}" required minlength="8" maxlength="128" />
 			</div>			
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">First Name</label>
+			<label class="col-sm-4 col-form-label">First Name:</label>
 			<div class="col-sm-8">
-				<input type="text" class="form-control" th:field="*{firstName}" requried minlength="2" maxlength="45" />
+				<input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="45" />
 			</div>			
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">Last Name</label>
+			<label class="col-sm-4 col-form-label">Last Name:</label>
 			<div class="col-sm-8">
-				<input type="text" class="form-control" th:field="*{lastName}" requried minlength="8" maxlength="20" />
+				<input type="text" class="form-control" th:field="*{lastName}" required minlength="8" maxlength="20" />
 			</div>			
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">Password</label>
+			<label class="col-sm-4 col-form-label">Password:</label>
 			<div class="col-sm-8">
-				<input type="password" class="form-control" th:field="*{password}" requried minlength="2" maxlength="45" />
+				<input type="password" class="form-control" th:field="*{password}" required minlength="2" maxlength="45" />
+			</div>			
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Roles:</label>
+			<div class="col-sm-8">
+				<th:block th:each="role : ${listRoles}">
+					<input type="checkbox" th:field="*{roles}" th:text="${role.name}" th:value="${role.id}" class="m-2"/>		
+					- <small>[[${role.description}]]</small>	
+					<br>		
+				</th:block>
+			</div>			
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Enabled:</label>
+			<div class="col-sm-8">
+				<input type="checkbox" th:field="*{enabled}"/>
 			</div>			
 		</div>
 		
 		<div>
 			<input type="submit" value="Save" class="btn btn-primary m-3"/>
-			<input type="button" value="Cancel" class="btn btn-secondary"/>
+			<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel"/>
 		</div>
 		
 	</div>
@@ -112,6 +131,13 @@
 	</div>
 	
 	</div>
+	<script type="text/javascript">
+    $(document).ready(function() {
+        $("#buttonCancel").on("click", function() {
+            window.location.href = "[[@{/users}]]";
+        });
+    });
+</script>
 
 </body>
 
